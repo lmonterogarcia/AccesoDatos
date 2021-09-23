@@ -11,7 +11,7 @@ public class Principal {
 		//Mi app apunta a un Ruta..
 
 //		String sRuta= "Ficheros\\ciudades.txt";
-		String sRuta= "C:\\";
+		String sRuta= "C:\\Users\\Usuario\\Documents\\workspaces";
 		File fch = new File(sRuta);
 
 		if (fch.exists()) {
@@ -19,7 +19,8 @@ public class Principal {
 			if (fch.isDirectory()) {
 //				infoDir(fch);
 //				diffTipoContenido(fch);
-				contadorContenido(fch);
+//				contadorContenido(fch);
+				contadorContenidoInterior(fch);
 			} else {
 				infoFile(fch);
 			}
@@ -87,6 +88,7 @@ public class Principal {
 		System.out.println("Dentro de este directorio hay:\n" + iContDir + " Carpetas\n" + iContFch + " Ficheros");
 		
 	}
+	
 
 	private static void infoFile(File fch) {
 		String sFchNombreArchivo = fch.getName();
@@ -109,5 +111,22 @@ public class Principal {
 
 	private static String SiNo(boolean exp) {
 		return  exp ? "Sí" : "No";
+	}
+	
+	private static void contadorContenidoInterior(File fch) {
+		File[] dirContenido;
+		String sResultado = "";
+		
+		if (fch.listFiles() != null) {
+			dirContenido = fch.listFiles();
+			for (File f : dirContenido) {
+				if (f.isDirectory()) {
+					System.out.println(f.getName());
+					sResultado += f.getName() + "{ ";
+					contadorContenidoInterior(f);
+					sResultado += " }";
+				} 
+			}
+		}
 	}
 }
