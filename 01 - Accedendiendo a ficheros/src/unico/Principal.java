@@ -18,11 +18,17 @@ public class Principal {
 			String sfchRutaAbsoluta = fch.getAbsolutePath();
 			long lFchByte = fch.length();
 			
+			boolean fchPuedeLeer = fch.canRead();
+			boolean fchPuedeEscribir = fch.canWrite();
+			boolean fchPuedeEjecutar = fch.canExecute();
+			
 			System.out.println("Nombre Archivo: " + sFchNombreArchivo);
 			System.out.println("Carpeta Padre: " + sFchCarpetaPadre);
 			System.out.println("Ruta Absulota: " + sfchRutaAbsoluta);
 			System.out.println("Tamanio (Byte): " + lFchByte);
-			
+			System.out.println("Se puede leer: " + SiNo(fchPuedeLeer));
+			System.out.println("Se puede escribir: " + SiNo(fchPuedeLeer));
+			System.out.println("Se puede ejecutar: " + SiNo(fchPuedeLeer));
 			
 		} else {
 			System.out.println("No Existe");
@@ -31,4 +37,7 @@ public class Principal {
 
 	}
 
+	private static String SiNo(boolean exp) {
+		return  exp ? "Sí" : "No";
+	}
 }
