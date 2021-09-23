@@ -74,20 +74,17 @@ public class Principal {
 	
 	private static void contadorContenido(File fch) {
 		File[] dirContenido = fch.listFiles();
-		ArrayList<String> nombres = new ArrayList<String>();
+		int iContDir = 0, iContFch = 0;
 		
-		int iDir = 0, iFch = 0;
 		for (File f : dirContenido) {
 			if (f.isDirectory()) {
-				iDir++;
+				iContDir++;
 			} else {
-				iFch++;
+				iContFch++;
 			}
-			
-			
 		}
 		
-		System.out.println("Dentro de este directorio hay:\n" + iDir + " Carpetas\n" + iFch + " Ficheros");
+		System.out.println("Dentro de este directorio hay:\n" + iContDir + " Carpetas\n" + iContFch + " Ficheros");
 		
 	}
 
