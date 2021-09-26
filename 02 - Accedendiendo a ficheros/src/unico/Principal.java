@@ -8,19 +8,22 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		//Mi app apunta a un Ruta..
+		//Mi app apunta a un Ruta.
 
 //		String sRuta= "Ficheros\\ciudades.txt";
-		String sRuta= "C:\\Users\\Usuario\\Documents\\workspaces";
+//		String sRuta= "C:\\Users\\Usuario\\Documents\\workspaces";
+		String sRuta = "/Volumes/120gb/RubenBelloso_060721.zip";
+		
 		File fch = new File(sRuta);
 
 		if (fch.exists()) {
 
 			if (fch.isDirectory()) {
-//				infoDir(fch);
-//				diffTipoContenido(fch);
-//				contadorContenido(fch);
-				contadorContenidoInterior(fch);
+				infoDir(fch);
+				diffTipoContenido(fch);
+				contadorContenido(fch);
+				System.out.println(estructuraContenidoInterior(fch));
+				System.out.println(contadorContenidoInterior(fch));
 			} else {
 				infoFile(fch);
 			}
@@ -88,7 +91,6 @@ public class Principal {
 		System.out.println("Dentro de este directorio hay:\n" + iContDir + " Carpetas\n" + iContFch + " Ficheros");
 		
 	}
-	
 
 	private static void infoFile(File fch) {
 		String sFchNombreArchivo = fch.getName();
@@ -110,23 +112,82 @@ public class Principal {
 	}
 
 	private static String SiNo(boolean exp) {
-		return  exp ? "Sí" : "No";
+		return  exp ? "Sï¿½" : "No";
 	}
 	
-	private static void contadorContenidoInterior(File fch) {
+	private static String estructuraContenidoInterior(File fch) {
 		File[] dirContenido;
-		String sResultado = "";
+		String sResultado = fch.getName() + "{";
+
+		if (fch.listFiles() != null) {
+			
+			dirContenido = fch.listFiles();
+			
+			for (File f : dirContenido) {
+				
+				if (f.isDirectory()) {
+					
+					sResultado += "\n   " + estructuraContenidoInterior(f);
+					
+				} 
+				
+//				if (f.isDirectory()) {
+//					sResultado += f.getName() + "{ ";
+//					sResultado += estructuraContenidoInterior(f);
+//					sResultado += "} ";
+//				} 
+				
+			}
+			sResultado += " }";
+			
+		}
+		
+		return sResultado;
+	}
+
+	private static String contadorContenidoInterior(File fch) {
+		
+		int iFiles = contadorContenidoInteriorFiles(fch), iFolders = contadorContenidoInteriorFolders(fch);
+		
+		return "La carpeta " + fch.getAbsolutePath() + " tiene:\n" + iFolders + " carpetas\n" + iFiles + " archivos";
+	}
+	
+	private static int contadorContenidoInteriorFiles(File fch) {
+		int iResultado = 0;
+		File[] dirContenido;
 		
 		if (fch.listFiles() != null) {
-			dirContenido = fch.listFiles();
-			for (File f : dirContenido) {
+			 dirContenido = fch.listFiles();
+			 
+			 for (File f : dirContenido) {
+				if (f.isFile()) {
+//					System.out.println(f.getName());
+//					System.out.println(f.getAbsolutePath());
+					iResultado++;
+				} else {
+					iResultado += contadorContenidoInteriorFiles(f);
+				}
+			}
+		}
+		
+		return iResultado;
+	}
+	
+	private static int contadorContenidoInteriorFolders(File fch) {
+		int iResultado = 0;
+		File[] dirContenido;
+		
+		if (fch.listFiles() != null) {
+			 dirContenido = fch.listFiles();
+			 
+			 for (File f : dirContenido) {
 				if (f.isDirectory()) {
-					System.out.println(f.getName());
-					sResultado += f.getName() + "{ ";
-					contadorContenidoInterior(f);
-					sResultado += " }";
+//					System.out.println(f.getName());
+					iResultado += 1 + contadorContenidoInteriorFolders(f);
 				} 
 			}
 		}
+		
+		return iResultado;
 	}
 }
