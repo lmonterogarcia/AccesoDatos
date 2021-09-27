@@ -12,16 +12,17 @@ public class Principal {
 
 //		String sRuta= "Ficheros\\ciudades.txt";
 //		String sRuta= "C:\\Users\\Usuario\\Documents\\workspaces";
-		String sRuta = "/Volumes/120gb/RubenBelloso_060721.zip";
+		String sRuta= "C:\\$Recycle.Bin";
+//		String sRuta = "/Volumes/120gb/RubenBelloso_060721.zip";
 		
 		File fch = new File(sRuta);
 
 		if (fch.exists()) {
 
 			if (fch.isDirectory()) {
-				infoDir(fch);
-				diffTipoContenido(fch);
-				contadorContenido(fch);
+//				infoDir(fch);
+//				diffTipoContenido(fch);
+//				contadorContenido(fch);
 				System.out.println(estructuraContenidoInterior(fch));
 				System.out.println(contadorContenidoInterior(fch));
 			} else {
