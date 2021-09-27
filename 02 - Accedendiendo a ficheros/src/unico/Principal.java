@@ -12,7 +12,7 @@ public class Principal {
 
 //		String sRuta= "Ficheros\\ciudades.txt";
 //		String sRuta= "C:\\Users\\Usuario\\Documents\\workspaces";
-		String sRuta= "C:\\$Recycle.Bin";
+		String sRuta= "C:\\";
 //		String sRuta = "/Volumes/120gb/RubenBelloso_060721.zip";
 		
 		File fch = new File(sRuta);
@@ -23,7 +23,7 @@ public class Principal {
 //				infoDir(fch);
 //				diffTipoContenido(fch);
 //				contadorContenido(fch);
-				System.out.println(estructuraContenidoInterior(fch));
+//				System.out.println(estructuraContenidoInterior(fch));
 				System.out.println(contadorContenidoInterior(fch));
 			} else {
 				infoFile(fch);
