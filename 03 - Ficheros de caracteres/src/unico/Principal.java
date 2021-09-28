@@ -18,7 +18,6 @@ public class Principal {
 		
 		File nombreFchSource = new File ("notas.txt");
 		File nombreFchTarget = new File ("notas_V2.txt");
-		
 		copiarFichero(nombreFchSource, nombreFchTarget);
 
 	}
