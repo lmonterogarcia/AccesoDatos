@@ -174,6 +174,21 @@ public class Principal {
 		return iResultado;
 	}
 	
+	private static int countItems(File fch) {
+		int c = 0;
+		
+		if (fch.listFiles() != null) {
+			File[] contenido = fch.listFiles();
+			c = contenido.length;
+			for (File f : contenido) {
+				if (f.isDirectory()) {
+					c += countItems(f);
+				}
+			}
+		}
+		return c;
+	}
+	
 	private static int contadorContenidoInteriorFolders(File fch) {
 		int iResultado = 0;
 		File[] dirContenido;
