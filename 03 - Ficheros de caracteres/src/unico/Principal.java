@@ -18,7 +18,8 @@ public class Principal {
 		
 		File nombreFchSource = new File ("notas.txt");
 		File nombreFchTarget = new File ("notas_V2.txt");
-		copiarFichero(nombreFchSource, nombreFchTarget);
+//		copiarFichero(nombreFchSource, nombreFchTarget);
+		System.out.println(copiarFicheroConContadorChar(nombreFchSource, nombreFchTarget));
 
 	}
 	
@@ -43,6 +44,44 @@ public class Principal {
 			System.err.println("Error Accediendo al Fichero");
 		}
 		
+	}
+	
+	private static String copiarFicheroConContadorChar(File nombreFchSource, File nombreFchTarget) {
+		int iCaracter, iConsonantes = 0, iVocales = 0;
+		try {
+			
+			FileReader fchSource = new FileReader(nombreFchSource);
+			FileWriter fchTarget = new FileWriter(nombreFchTarget);
+			
+			iCaracter = fchSource.read();
+			
+			while (iCaracter != -1) {
+				if (Character.isLetter((char) iCaracter)
+						&& (
+							(String.valueOf((char)iCaracter).toLowerCase()).charAt(0) == 'a'
+							|| (String.valueOf((char)iCaracter).toLowerCase()).charAt(0) == 'e'
+							|| (String.valueOf((char)iCaracter).toLowerCase()).charAt(0) == 'i'
+							|| (String.valueOf((char)iCaracter).toLowerCase()).charAt(0) == 'o'
+							|| (String.valueOf((char)iCaracter).toLowerCase()).charAt(0) == 'u'
+							)) {
+					iVocales++;
+				} else if (Character.isLetter((char) iCaracter)) {
+					iConsonantes++;
+				}
+				fchTarget.write((char)iCaracter);
+				iCaracter = fchSource.read();
+			}
+			
+			fchSource.close();
+			fchTarget.close();
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("Fichero No ENCONTRADO");
+		} catch (IOException e) {
+			System.err.println("Error Accediendo al Fichero");
+		}
+		
+		return "El archivo se ha copiado.\n" + iVocales + " vocales y " + iConsonantes + " consonantes.";
 	}
 
 	private static void leerFch(File nombreFichero) {
@@ -69,6 +108,7 @@ public class Principal {
 	private static void escribirFch(File nombreFichero) {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		String sTexto ="";
+		boolean booPrimeraLinea = true;
 		
 		
 		try {
@@ -77,8 +117,11 @@ public class Principal {
 			do {
 				System.out.println("Escriba una frase (Para terminar dejelo vacio y pulse ENTER): ");
 				sTexto = teclado.readLine();
-				if (!sTexto.isEmpty()) {
-					fch.write(sTexto + "\n");
+				if (!sTexto.isEmpty() && !booPrimeraLinea) {
+					fch.write("\n" + sTexto);
+				} else if (sTexto.isEmpty()){
+					fch.write(sTexto);
+					booPrimeraLinea = false;
 				}
 			} while (!sTexto.isEmpty());
 				fch.close();
