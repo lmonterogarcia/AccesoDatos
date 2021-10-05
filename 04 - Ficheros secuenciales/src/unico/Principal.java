@@ -1,7 +1,10 @@
 package unico;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +23,10 @@ public class Principal {
 
 		//		escribirFch(fch, sTexto);
 		escribirFicheroList(fch, aTexto);
+		
+		// leer ficheros
+		ArrayList<String> aPalabras = leerFichero(fch);
+		aPalabras.forEach(s -> System.out.println(s));
 
 
 
@@ -70,7 +77,8 @@ public class Principal {
 			//Volcamos el texto que queremos guardar sobre el buffer
 			// y este buffer lo escribre sobre el fichero.
 			oFicheroBuff.write(sTexto);
-			//Antes de cerrar el buffer hayq eu vaciarlo, asi no se pierde información.
+
+			//Antes de cerrar el buffer hay que vaciarlo, asi no se pierde información.
 			oFicheroBuff.flush();
 
 			//Cerramos el buffer
@@ -95,7 +103,7 @@ public class Principal {
 			// y este buffer lo escribre sobre el fichero.
 			oFichero.write(sTexto);
 
-			//Antes de cerrar el buffer hayq eu vaciarlo, asi no se pierde información.
+			//Antes de cerrar el buffer hay que vaciarlo, asi no se pierde información.
 			oFichero.flush();
 
 			//Cerramos el buffer
@@ -106,6 +114,33 @@ public class Principal {
 
 	}
 
-
+	private static ArrayList<String> leerFichero(File fch) {
+		
+		ArrayList<String>  aContenido = new ArrayList<String>();
+		
+		try {
+			FileReader fichero = new FileReader(fch);
+			BufferedReader bufLectura =  new BufferedReader(fichero);
+			
+			String sLinea = bufLectura.readLine();
+			
+			while(sLinea != null) {
+				//Procesamos el fichero
+				aContenido.add(sLinea);
+				//Leemos siguiente linea
+				sLinea = bufLectura.readLine();
+				
+			}
+			
+			bufLectura.close();
+			fichero.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("El fichero no existe");
+		} catch (IOException ioe){
+			System.out.println("Se ha producido un error al acceder al fichero");
+		}
+		
+		return aContenido;
+	}
 
 }
