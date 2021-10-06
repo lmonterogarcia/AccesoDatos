@@ -32,27 +32,34 @@ public class Principal {
 
 	private static void escribirPersonas(String fch, ArrayList<Persona> aPersonas) {
 
-		File fichero = new File(fch);
+		
 		boolean booPrimera = true;
 		
 		try {
+			File fichero = new File(fch);
 			BufferedWriter buffWriter = new BufferedWriter(new FileWriter(fichero));
+			final String sSeparador = "#";
+			
 			for (Persona persona : aPersonas) {
 				if (booPrimera) {
-					buffWriter.write(persona.getsNombre() + "#" + persona.getsApellidos() + "#" + persona.getbEdades());
 					booPrimera = !booPrimera;
 				} else {
 					buffWriter.newLine();
-					buffWriter.write(persona.getsNombre() + "#" + persona.getsApellidos() + "#" + persona.getbEdades());
 				}
 				
+				buffWriter.write(persona.getsNombre() + "#" + persona.getsApellidos() + "#" + persona.getbEdades());	
+			}
+			
+			for (int i = 0; i < aPersonas.size(); i++) {
+				String sLinea = aPersonas[i].getsNombre() + sSeparador + aPersonas[i].getsApellidos() + sSeparador + aPersonas[i].getbEdades();
 			}
 			
 			buffWriter.flush();
 			buffWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("El fichero no existe");
+		} catch (IOException ioe){
+			System.out.println("Se ha producido un error al acceder al fichero");
 		}
 
 	}
@@ -83,11 +90,19 @@ public class Principal {
 			bufLectura.close();
 			fichero.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("El fichero no existe");
+			System.err.println("El fichero no existe");
 		} catch (IOException ioe){
-			System.out.println("Se ha producido un error al acceder al fichero");
+			System.err.println("Se ha producido un error al acceder al fichero");
+		} catch (Exception eiu) {
+			System.err.println("Ha ocurrido un error no clasificado");
+			System.err.println(eiu);
 		}
 
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return aPersonas;
 	}
 

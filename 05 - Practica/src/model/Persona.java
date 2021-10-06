@@ -7,6 +7,12 @@ public class Persona {
 	private String sNombre, sApellidos;
 	private byte bEdades;
 	
+	public Persona() {
+		setsNombre("");
+		setsApellidos("");
+		setbEdades((byte)-1);
+	}
+	
 	public Persona(String sNombre, String sApellido, byte bEdad) {
 		setsNombre(sNombre);
 		setsApellidos(sApellido);
