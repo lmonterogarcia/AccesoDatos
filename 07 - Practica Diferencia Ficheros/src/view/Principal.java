@@ -31,8 +31,9 @@ public class Principal {
 			while (sLinea01 != null) {
 				BufferedReader brFch02 = new BufferedReader(new FileReader(fch02));
 				String sLinea02 = brFch02.readLine();
+				boolean booEncontrado = false;
 				
-				while (sLinea02 != null) {
+				while (sLinea02 != null && !booEncontrado) {
 					
 					if (sLinea01.equals(sLinea02)) {
 						
@@ -44,6 +45,7 @@ public class Principal {
 						}
 						
 						bwFchResultado.write(sLinea01);
+						booEncontrado = true;
 						
 						
 					}
