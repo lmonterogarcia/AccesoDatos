@@ -30,7 +30,12 @@ public class Conexion {
 
 
 	public void setsHost(String sHost) {
-		this.sHost = sHost;
+	
+		if (sHost == null) {
+			this.sHost = "127.0.0.1";
+		} else {
+			this.sHost = sHost;
+		}
 	}
 
 
@@ -40,7 +45,12 @@ public class Conexion {
 
 
 	public void setsDbName(String sDbName) {
-		this.sDbName = sDbName;
+		
+		if (sDbName == null) {
+			this.sHost = "ORCL";
+		} else {
+			this.sDbName = sDbName;
+		}
 	}
 
 
@@ -50,7 +60,11 @@ public class Conexion {
 
 
 	public void setsUsername(String sUsername) {
-		this.sUsername = sUsername;
+		if (sUsername == null) {
+			this.sHost = "123456";
+		} else {
+			this.sUsername = sUsername;
+		}
 	}
 
 
