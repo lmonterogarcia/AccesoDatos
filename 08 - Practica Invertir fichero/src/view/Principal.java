@@ -23,6 +23,7 @@ public class Principal {
 		int iNumLineas = contadorLineas(fch01);
 		String sLineaLeida = "";
 		boolean booPrimera = true;
+		
 		try {
 			BufferedWriter buffWrite = new BufferedWriter(new FileWriter(fchResultado));
 			for (int i = iNumLineas; i > 0; i--) {
