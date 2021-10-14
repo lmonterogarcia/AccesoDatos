@@ -46,9 +46,9 @@ public class Principal {
 
 		} catch (FileNotFoundException e) {
 			System.out.println("El fichero no existe");
-		} catch (IOException ioe){
+		} catch (IOException i){
 			System.out.println("Se ha producido un error al acceder al fichero");
-		} catch (Exception eiu) {
+		} catch (Exception o) {
 			System.out.println("Se ha producido un error no tipificado");
 		}
 
