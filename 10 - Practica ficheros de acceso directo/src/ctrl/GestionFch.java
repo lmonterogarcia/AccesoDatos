@@ -8,10 +8,16 @@ import model.Empleado;
 
 public class GestionFch {
 
+	private int iNumRegistos;
 	private RandomAccessFile fch;
-	
+
 	public GestionFch(String sNombreArchivo) {
 		abirFichero(sNombreArchivo);
+		try {
+			iNumRegistos = (int) (fch.length() / model.IEmpleado.iLongRegistro);
+		} catch (IOException e) {
+			System.err.println("Se ha encontrado un error al acceder al fichero");
+		}
 	}
 
 	private void abirFichero(String sNombreArchivo) {
@@ -30,62 +36,108 @@ public class GestionFch {
 		}		
 	}
 
-	public void escribirRegistro(int iNumRegistro, Empleado persona) {
-		
-		try {
-			fch.seek(getPosition(iNumRegistro));
-			
-			//Nombre
-			String sNombre = persona.getsNombre();
-			char cCaracter;
-			for (int i = 0; i < model.Empleado.getbNumCaracteresNombrePersona(); i++) {
-				cCaracter = (i < sNombre.length()) ? sNombre.charAt(i) : ' ';
-				fch.writeChar(cCaracter);
-			}
-			
-			//Edad
-			fch.writeByte(persona.getbEdad());
-			
-			//Altura
-			fch.writeFloat(persona.getfAltura());
-			
-			
-		} catch (IOException e) {
-			System.err.println("El fichero no es accesible");
-		}
-		
-	}
-
 	private long getPosition(int iNumRegistro) {
-		
+
 		return (iNumRegistro - 1) * model.IEmpleado.iLongRegistro;
 	}
 
-	public Empleado leerRegistro(int iNumRegistro) {
-		String sNombre = "";
-		byte bEdad = 0;
-		float fAltura = 0.0f;
-		
+	public void escribirRegistro(int iNumRegistro, Empleado persona) {
+
 		try {
-			
 			fch.seek(getPosition(iNumRegistro));
-			
+			char cCaracter;
 			//Nombre
-			
+			String sNombre = persona.getsNombre();
+			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
+				cCaracter = (i < sNombre.length()) ? sNombre.charAt(i) : ' ';
+				fch.writeChar(cCaracter);
+			}
+
+			//Apellidos
+			String sApellidos = persona.getsApellidos();
+			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
+				cCaracter = (i < sApellidos.length()) ? sApellidos.charAt(i) : ' ';
+				fch.writeChar(cCaracter);
+			}
+
+			//Telefono
+			fch.writeLong(persona.getlTelefono());
+
+			//Email
+			String sEmail = persona.getsEmail();
+			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
+				cCaracter = (i < sEmail.length()) ? sEmail.charAt(i) : ' ';
+				fch.writeChar(cCaracter);
+			}
+
+			//Edad
+			fch.writeByte(persona.getiEdad());
+
+			//Sueldo
+			fch.writeDouble(persona.getdSueldo());
+
+
+		} catch (IOException e) {
+			System.err.println("El fichero no es accesible");
+		}
+
+	}
+
+	public Empleado leerRegistro(int iNumRegistro) {
+		String sNombre = "", sApellidos = "", sEmail = "";
+		int iEdad = 0;
+		long lTelefono = 0;
+		double dSueldo = 0;
+
+		try {
+
+			fch.seek(getPosition(iNumRegistro));
+
+			//Nombre
 			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
 				sNombre += fch.readChar();
 			}
 			
+			//Apellidos
+			for (int i = 0; i < model.IEmpleado.bNumsApellidos; i++) {
+				sApellidos += fch.readChar();
+			}
+			
+			//Telefono
+			lTelefono = fch.readLong();
+			
+			//Email
+			for (int i = 0; i < model.IEmpleado.bNumsEmail; i++) {
+				sEmail += fch.readChar();
+			}
+			
 			//Edad
-			bEdad = fch.readByte();
-			
-			//Altura
-			fAltura = fch.readFloat();
-			
+			iEdad = fch.readByte();
+
+			//Sueldo
+			dSueldo = fch.readDouble();
+
 		} catch (IOException e) {
 			System.err.println("El fichero no es accesible");
 		}
+
+		return new Empleado(sNombre.trim(),sApellidos.trim(),lTelefono,sEmail.trim(),iEdad,dSueldo);
+	}
+	
+	public String listar() {
+		Empleado aEmpleado = new Empleado();
+		String sResultado = "";
+		boolean booPrimeraLinea = true;
 		
-		return new Empleado(sNombre.trim(),bEdad,fAltura);
+		for (int i = 0; i < iNumRegistos; i++) {
+			aEmpleado = leerRegistro(i);
+			if (booPrimeraLinea) {
+				sResultado = aEmpleado.toString();
+			} else {
+				sResultado = "\n" + aEmpleado.toString();
+			}
+		}
+		
+		return sResultado;
 	}
 }

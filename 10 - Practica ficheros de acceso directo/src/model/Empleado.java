@@ -32,7 +32,9 @@ public class Empleado implements IEmpleado{
 	}
 
 	public void setsNombre(String sNombre) {
-		this.sNombre = sNombre;
+		if (sNombre.length() < bNumsNombre) {
+			this.sNombre = sNombre;
+		}	
 	}
 
 	public String getsApellidos() {
@@ -40,7 +42,9 @@ public class Empleado implements IEmpleado{
 	}
 
 	public void setsApellidos(String sApellidos) {
-		this.sApellidos = sApellidos;
+		if (sApellidos.length() < bNumsApellidos) {
+			this.sApellidos = sApellidos;
+		}
 	}
 
 	public String getsEmail() {
@@ -48,7 +52,9 @@ public class Empleado implements IEmpleado{
 	}
 
 	public void setsEmail(String sEmail) {
-		this.sEmail = sEmail;
+		if (sEmail.length() < bNumsEmail) {
+			this.sEmail = sEmail;
+		}
 	}
 
 	public long getlTelefono() {
