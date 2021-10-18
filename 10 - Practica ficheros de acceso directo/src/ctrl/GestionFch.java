@@ -13,6 +13,10 @@ public class GestionFch {
 
 	public GestionFch(String sNombreArchivo) {
 		abirFichero(sNombreArchivo);
+		calcularNumRegistro();
+	}
+	
+	private void calcularNumRegistro() {
 		try {
 			iNumRegistos = (int) (fch.length() / model.IEmpleado.iLongRegistro);
 		} catch (IOException e) {
@@ -41,10 +45,10 @@ public class GestionFch {
 		return (iNumRegistro - 1) * model.IEmpleado.iLongRegistro;
 	}
 
-	public void escribirRegistro(int iNumRegistro, Empleado persona) {
+	public void escribirRegistro(Empleado persona) {
 
 		try {
-			fch.seek(getPosition(iNumRegistro));
+			fch.seek(getPosition(iNumRegistos + 1));
 			char cCaracter;
 			//Nombre
 			String sNombre = persona.getsNombre();
@@ -75,6 +79,8 @@ public class GestionFch {
 
 			//Sueldo
 			fch.writeDouble(persona.getdSueldo());
+			
+			iNumRegistos++;
 
 
 		} catch (IOException e) {
