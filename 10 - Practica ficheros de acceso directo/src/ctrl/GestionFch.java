@@ -100,7 +100,6 @@ public class GestionFch {
 		double dSueldo = 0;
 
 		try {
-			System.out.println("Leer Registro");
 			fch.seek(getPosition(iNumRegistro));
 
 			//Nombre
@@ -130,7 +129,6 @@ public class GestionFch {
 		} catch (IOException e) {
 			System.err.println("El fichero no es accesible");
 		}
-		System.out.println("Salir leer Registro");
 		return new Empleado(sNombre.trim(),sApellidos.trim(),lTelefono,sEmail.trim(),iEdad,dSueldo);
 	}
 	
@@ -138,7 +136,6 @@ public class GestionFch {
 		Empleado aEmpleado = new Empleado();
 		String sResultado = "";
 		boolean booPrimeraLinea = true;
-		System.out.println("Listar");
 		for (int i = 1; i <= iNumRegistos; i++) {
 			aEmpleado = leerRegistro(i);
 			if (booPrimeraLinea) {
@@ -150,5 +147,46 @@ public class GestionFch {
 		}
 		
 		return sResultado;
+	}
+
+	public void modificarRegistro(Empleado oEmpleado, int iPosicion) {
+		try {
+			fch.seek(getPosition(iPosicion));
+			char cCaracter;
+			//Nombre
+			String sNombre = oEmpleado.getsNombre();
+			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
+				cCaracter = (i < sNombre.length()) ? sNombre.charAt(i) : ' ';
+				fch.writeChar(cCaracter);
+			}
+
+			//Apellidos
+			String sApellidos = oEmpleado.getsApellidos();
+			for (int i = 0; i < model.IEmpleado.bNumsApellidos; i++) {
+				cCaracter = (i < sApellidos.length()) ? sApellidos.charAt(i) : ' ';
+				fch.writeChar(cCaracter);
+			}
+
+			//Telefono
+			fch.writeLong(oEmpleado.getlTelefono());
+
+			//Email
+			String sEmail = oEmpleado.getsEmail();
+			for (int i = 0; i < model.IEmpleado.bNumsEmail; i++) {
+				cCaracter = (i < sEmail.length()) ? sEmail.charAt(i) : ' ';
+				fch.writeChar(cCaracter);
+			}
+
+			//Edad
+			fch.writeInt(oEmpleado.getiEdad());
+
+			//Sueldo
+			fch.writeDouble(oEmpleado.getdSueldo());
+
+
+		} catch (IOException e) {
+			System.err.println("El fichero no es accesible");
+		}
+		
 	}
 }
