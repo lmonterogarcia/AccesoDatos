@@ -10,9 +10,13 @@ public class GestionFch {
 
 	private int iNumRegistos;
 	private RandomAccessFile fch;
+	
+	public int  getiNumRegistro() {
+		return this.iNumRegistos;
+	}
 
 	public GestionFch(String sNombreArchivo) {
-		abirFichero(sNombreArchivo);
+		abrirFichero(sNombreArchivo);
 		calcularNumRegistro();
 	}
 	
@@ -24,7 +28,7 @@ public class GestionFch {
 		}
 	}
 
-	private void abirFichero(String sNombreArchivo) {
+	private void abrirFichero(String sNombreArchivo) {
 		try {
 			fch = new RandomAccessFile(sNombreArchivo,"rw");
 		} catch (FileNotFoundException e) {
@@ -59,7 +63,7 @@ public class GestionFch {
 
 			//Apellidos
 			String sApellidos = persona.getsApellidos();
-			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
+			for (int i = 0; i < model.IEmpleado.bNumsApellidos; i++) {
 				cCaracter = (i < sApellidos.length()) ? sApellidos.charAt(i) : ' ';
 				fch.writeChar(cCaracter);
 			}
@@ -69,13 +73,13 @@ public class GestionFch {
 
 			//Email
 			String sEmail = persona.getsEmail();
-			for (int i = 0; i < model.IEmpleado.bNumsNombre; i++) {
+			for (int i = 0; i < model.IEmpleado.bNumsEmail; i++) {
 				cCaracter = (i < sEmail.length()) ? sEmail.charAt(i) : ' ';
 				fch.writeChar(cCaracter);
 			}
 
 			//Edad
-			fch.writeByte(persona.getiEdad());
+			fch.writeInt(persona.getiEdad());
 
 			//Sueldo
 			fch.writeDouble(persona.getdSueldo());
@@ -96,7 +100,7 @@ public class GestionFch {
 		double dSueldo = 0;
 
 		try {
-
+			System.out.println("Leer Registro");
 			fch.seek(getPosition(iNumRegistro));
 
 			//Nombre
@@ -118,7 +122,7 @@ public class GestionFch {
 			}
 			
 			//Edad
-			iEdad = fch.readByte();
+			iEdad = fch.readInt();
 
 			//Sueldo
 			dSueldo = fch.readDouble();
@@ -126,7 +130,7 @@ public class GestionFch {
 		} catch (IOException e) {
 			System.err.println("El fichero no es accesible");
 		}
-
+		System.out.println("Salir leer Registro");
 		return new Empleado(sNombre.trim(),sApellidos.trim(),lTelefono,sEmail.trim(),iEdad,dSueldo);
 	}
 	
@@ -134,13 +138,14 @@ public class GestionFch {
 		Empleado aEmpleado = new Empleado();
 		String sResultado = "";
 		boolean booPrimeraLinea = true;
-		
-		for (int i = 0; i < iNumRegistos; i++) {
+		System.out.println("Listar");
+		for (int i = 1; i <= iNumRegistos; i++) {
 			aEmpleado = leerRegistro(i);
 			if (booPrimeraLinea) {
-				sResultado = aEmpleado.toString();
+				sResultado += i+". " + aEmpleado.toString();
+				booPrimeraLinea = false;
 			} else {
-				sResultado = "\n" + aEmpleado.toString();
+				sResultado += "\n" + i +". " + aEmpleado.toString();
 			}
 		}
 		

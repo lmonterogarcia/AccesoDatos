@@ -32,7 +32,7 @@ public class Empleado implements IEmpleado{
 	}
 
 	public void setsNombre(String sNombre) {
-		if (sNombre.length() < bNumsNombre) {
+		if (sNombre.length() <= bNumsNombre) {
 			this.sNombre = sNombre;
 		}	
 	}
@@ -42,7 +42,7 @@ public class Empleado implements IEmpleado{
 	}
 
 	public void setsApellidos(String sApellidos) {
-		if (sApellidos.length() < bNumsApellidos) {
+		if (sApellidos.length() <= bNumsApellidos) {
 			this.sApellidos = sApellidos;
 		}
 	}
@@ -52,7 +52,7 @@ public class Empleado implements IEmpleado{
 	}
 
 	public void setsEmail(String sEmail) {
-		if (sEmail.length() < bNumsEmail) {
+		if (sEmail.length() <= bNumsEmail) {
 			this.sEmail = sEmail;
 		}
 	}
