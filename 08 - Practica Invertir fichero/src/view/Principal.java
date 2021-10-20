@@ -52,8 +52,6 @@ public class Principal {
 			System.out.println("Se ha producido un error no tipificado");
 		}
 
-
-
 	}
 
 	private static int contadorLineas(File fch01) {

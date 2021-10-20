@@ -38,7 +38,7 @@ public class Principal {
 				sLinea = buffReader.readLine();
 			}
 
-			buffReader.close();
+			buffReader.close();  
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

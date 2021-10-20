@@ -51,7 +51,7 @@ public class Principal {
 			}
 			
 			for (int i = 0; i < aPersonas.size(); i++) {
-				String sLinea = aPersonas[i].getsNombre() + sSeparador + aPersonas[i].getsApellidos() + sSeparador + aPersonas[i].getbEdades();
+				String sLinea = aPersonas.get(i).getsNombre() + sSeparador + aPersonas.get(i).getsApellidos() + sSeparador + aPersonas.get(i).getbEdades();
 			}
 			
 			buffWriter.flush();
@@ -95,7 +95,7 @@ public class Principal {
 			System.err.println("Se ha producido un error al acceder al fichero");
 		} catch (Exception eiu) {
 			System.err.println("Ha ocurrido un error no clasificado");
-			System.err.println(eiu);
+			eiu.printStackTrace();
 		}
 
 		try {
