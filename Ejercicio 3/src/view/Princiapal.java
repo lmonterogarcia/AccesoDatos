@@ -38,10 +38,10 @@ public class Princiapal {
 		}
 	}
 
-	private static int contarIguales(String sLineaLeida, File fch) {
+	private static int contarIguales(String sLineaLeida, File fch) throws Exception{
 		int iContador = 0;
 
-		try {
+//		try {
 			BufferedReader br = new BufferedReader(new FileReader(fch));
 			String sLineaLeida2 = br.readLine();
 
@@ -53,16 +53,16 @@ public class Princiapal {
 			}
 			br.close();
 
-		} catch (FileNotFoundException e) {
-			System.err.println("El fichero no existe");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.err.println("Se ha producido un error al acceder al fichero");
-			e.printStackTrace();
-		} catch (Exception e) {
-			System.err.println("Ha ocurrido un error no clasificado");
-			e.printStackTrace();
-		}
+//		} catch (FileNotFoundException e) {
+//			System.err.println("El fichero no existe");
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			System.err.println("Se ha producido un error al acceder al fichero");
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			System.err.println("Ha ocurrido un error no clasificado");
+//			e.printStackTrace();
+//		}
 		return iContador;
 	}
 
