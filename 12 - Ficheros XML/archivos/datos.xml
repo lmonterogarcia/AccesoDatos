@@ -15,6 +15,7 @@
 		<nombre>Juan</nombre>
 		<apellidos>Garcia Cepera</apellidos>
 		<nick>Superman</nick>
+		<puntos>45</puntos>
 	</jugador>
 	<partida numero ="2">
 		<duracion>120</duracion>
@@ -24,6 +25,7 @@
 	<jugador numero ="567">
 		<nombre>Jaime</nombre>
 		<apellidos>Perez Cobo</apellidos>
+		<nick>SuperMario</nick>
 		<puntos>1</puntos>
 	</jugador>
 	<jugador numero ="246">

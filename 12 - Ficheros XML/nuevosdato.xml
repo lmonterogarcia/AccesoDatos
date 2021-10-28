@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<game>
+    	
+    <partida numero="1">
+        		
+        <duracion>120</duracion>
+        		
+        <jugador1>242</jugador1>
+        		
+        <jugador2>234</jugador2>
+        	
+    </partida>
+    	
+    <jugador numero="242">
+        		
+        <nombre>Pepe</nombre>
+        		
+        <apellidos>Gomez Cepera</apellidos>
+        		
+        <nick>Batman</nick>
+        		
+        <puntos>45</puntos>
+        	
+    </jugador>
+    	
+    <jugador numero="234">
+        		
+        <nombre>Juan</nombre>
+        		
+        <apellidos>Garcia Cepera</apellidos>
+        		
+        <nick>Superman</nick>
+        		
+        <puntos>45</puntos>
+        	
+    </jugador>
+    	
+    <partida numero="2">
+        		
+        <duracion>120</duracion>
+        		
+        <jugador1>567</jugador1>
+        		
+        <jugador2>246</jugador2>
+        	
+    </partida>
+    	
+    <jugador numero="567">
+        		
+        <nombre>Jaime</nombre>
+        		
+        <apellidos>Perez Cobo</apellidos>
+        		
+        <nick>SuperMario</nick>
+        		
+        <puntos>1</puntos>
+        	
+    </jugador>
+    	
+    <jugador numero="246">
+        		
+        <nombre>Aurelio</nombre>
+        		
+        <apellidos>Lopez Armes</apellidos>
+        		
+        <nick>Thor</nick>
+        		
+        <puntos>67</puntos>
+        	
+    </jugador>
+    	
+    <jugador numero="793">
+        		
+        <nombre>Manuel</nombre>
+        		
+        <apellidos>Norte Sur</apellidos>
+        		
+        <nick>Iron Man</nick>
+        		
+        <puntos>145</puntos>
+        	
+    </jugador>
+    
+    <jugador numero="678">
+        <nombre>Fernando</nombre>
+        <apellidos>Gomez Murube</apellidos>
+        <nick>La Masa</nick>
+        <puntos>146</puntos>
+    </jugador>
+    <jugador numero="563">
+        <nombre>Javier</nombre>
+        <apellidos>Garcia Murube</apellidos>
+        <nick>Luigi</nick>
+        <puntos>45</puntos>
+    </jugador>
+    <jugador numero="786">
+        <nombre>Miguel</nombre>
+        <apellidos>Murube Murube</apellidos>
+        <nick>Gordo</nick>
+        <puntos>76</puntos>
+    </jugador>
+    <jugador numero="2">
+        <nombre>Oliver</nombre>
+        <apellidos>Montero Lopez</apellidos>
+        <nick>Flaco</nick>
+        <puntos>123</puntos>
+    </jugador>
+</game>

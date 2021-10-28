@@ -1,9 +1,15 @@
 package ctrl;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.*;
 
 import org.w3c.dom.*;
@@ -80,37 +86,36 @@ public class GestionFchXML {
 					Element eElement = (Element) nNode;
 					String sNombre, sApellidos, sNick;
 					int iNumero, iPuntos;
-					
+
 					try {
 						iNumero = Integer.parseInt(eElement.getAttribute("numero"));
 					} catch (Exception e) {
 						iNumero = 0;
 					}
-					
+
 					try {
 						sNombre = eElement.getElementsByTagName("nombre").item(0).getTextContent();
 					} catch (Exception e) {
 						sNombre = "";
 					}
-					
+
 					try {
 						sApellidos = eElement.getElementsByTagName("apellidos").item(0).getTextContent();
 					} catch (Exception e) {
 						sApellidos = "";
 					}
-					
+
 					try {
 						sNick = eElement.getElementsByTagName("nick").item(0).getTextContent();
 					} catch (Exception e) {
 						sNick = "";
 					}
-					
+
 					try {
 						iPuntos = Integer.parseInt(eElement.getElementsByTagName("puntos").item(0).getTextContent());
 					} catch (Exception e) {
 						iPuntos = 0;
 					}
-				
 
 					listadoJugadores.add(new Jugador(iNumero, sNombre, sApellidos, sNick, iPuntos));
 				}
@@ -125,7 +130,7 @@ public class GestionFchXML {
 	}
 
 	public ArrayList<Partida> getPartidas() {
-		
+
 		ArrayList<Partida> listadoPartidas = new ArrayList<Partida>();
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		String sExpression = "/game/partida";
@@ -139,41 +144,99 @@ public class GestionFchXML {
 					Element eElement = (Element) nNode;
 					int iNumero, iDuracion;
 					Jugador oJugador1, oJugador2;
-					
+
 					try {
 						iNumero = Integer.parseInt(eElement.getAttribute("numero"));
 					} catch (Exception e) {
 						iNumero = 0;
 					}
-					
+
 					try {
-						oJugador1 = new Jugador (Integer.parseInt(eElement.getElementsByTagName("jugador1").item(0).getTextContent()));
+						oJugador1 = new Jugador(
+								Integer.parseInt(eElement.getElementsByTagName("jugador1").item(0).getTextContent()));
 					} catch (Exception e) {
 						oJugador1 = null;
 					}
-					
+
 					try {
-						oJugador2 = new Jugador(Integer.parseInt(eElement.getElementsByTagName("jugador2").item(0).getTextContent()));
+						oJugador2 = new Jugador(
+								Integer.parseInt(eElement.getElementsByTagName("jugador2").item(0).getTextContent()));
 					} catch (Exception e) {
 						oJugador2 = null;
 					}
-					
+
 					try {
-						iDuracion = Integer.parseInt(eElement.getElementsByTagName("duracion").item(0).getTextContent());
+						iDuracion = Integer
+								.parseInt(eElement.getElementsByTagName("duracion").item(0).getTextContent());
 					} catch (Exception e) {
 						iDuracion = 0;
 					}
-				
 
 					listadoPartidas.add(new Partida(iNumero, iDuracion, oJugador1, oJugador2));
 				}
 			}
 
 		} catch (XPathExpressionException e) {
-			System.err.println("Error aplicando al expresion");
+			System.err.println("Error aplicando la expresion");
 			e.printStackTrace();
 		}
-		
+
 		return listadoPartidas;
+	}
+
+	public void addJugador(Jugador oJugador) {
+
+		Element item = docXML.createElement("jugador");
+
+		item.setAttribute("numero", Integer.toString(oJugador.getiNumero()));
+
+		Element tagName;
+		Node tagValue;
+
+		// Nombre
+		tagName = docXML.createElement("nombre");
+		tagValue = docXML.createTextNode(oJugador.getsNombre());
+		tagName.appendChild(tagValue);
+		item.appendChild(tagName);
+
+		// Apellidos
+		tagName = docXML.createElement("apellidos");
+		tagValue = docXML.createTextNode(oJugador.getsApellidos());
+		tagName.appendChild(tagValue);
+		item.appendChild(tagName);
+
+		// Apellidos
+		tagName = docXML.createElement("nick");
+		tagValue = docXML.createTextNode(oJugador.getsNick());
+		tagName.appendChild(tagValue);
+		item.appendChild(tagName);
+
+		// Apellidos
+		tagName = docXML.createElement("puntos");
+		tagValue = docXML.createTextNode(Integer.toString(oJugador.getiPuntos()));
+		tagName.appendChild(tagValue);
+		item.appendChild(tagName);
+
+		Node nRaiz = docXML.getFirstChild();
+		nRaiz.appendChild(item);
+	}
+
+	public void saveData() {
+
+		try {
+			Transformer tr = TransformerFactory.newInstance().newTransformer();
+			tr.setOutputProperty(OutputKeys.INDENT,"yes");
+			tr.setOutputProperty(OutputKeys.METHOD,"xml");
+			tr.setOutputProperty(OutputKeys.ENCODING,"UTF-8");
+			tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount","4");
+			
+			// enviar el DOM al fichero
+			tr.transform(new DOMSource(docXML)
+						, new StreamResult(new FileOutputStream("nuevosdato.xml")));
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 }
