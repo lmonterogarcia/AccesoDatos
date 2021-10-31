@@ -20,9 +20,9 @@ import org.xml.sax.SAXException;
 import model.*;
 
 public class GestFch {
-	
+
 	private Document docXML;
-	
+
 	public GestFch(String filename) {
 		try {
 			docXML = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(filename);
@@ -38,49 +38,44 @@ public class GestFch {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public ArrayList<CcAa> getCcAa() {
-		
+
 		ArrayList<CcAa> listadCcAa = new ArrayList<CcAa>();
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		String sExpression = "/root/ccaa";
-		
+
 		try {
 			NodeList nodeList = (NodeList) xPath.compile(sExpression).evaluate(docXML, XPathConstants.NODESET);
-			
+
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node nNode = nodeList.item(i);
-				
+
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					String sNombre;
 					ArrayList<Provincia> listadoProvincias;
-					
 					try {
 						sNombre = eElement.getAttribute("nombre");
 					} catch (Exception e) {
 						sNombre = "";
 					}
-					
 					listadoProvincias = getProvincias(eElement.getAttribute("id"));
-					listadCcAa.add(new CcAa(sNombre,listadoProvincias));
+					listadCcAa.add(new CcAa(sNombre, listadoProvincias));
 				}
-				
 			}
 		} catch (XPathExpressionException e) {
 			System.err.println("Error aplicando al expresion");
 			e.printStackTrace();
 		}
-		
-		
-		
+
 		return listadCcAa;
 	}
 
 	private ArrayList<Provincia> getProvincias(String attribute) {
 		ArrayList<Provincia> listadProvincias = new ArrayList<Provincia>();
 		NodeList nodes = docXML.getElementsByTagName("provincia");
-		
+
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Element nodo = (Element) nodes.item(i);
 			String sIdCcAa = nodo.getAttribute("ccaa");
@@ -92,23 +87,23 @@ public class GestFch {
 				} catch (Exception e) {
 					sNombre = "";
 				}
-				
+
 				listadoCiudades = getCiudades(nodo.getAttribute("id"));
-				listadProvincias.add(new Provincia(sNombre,listadoCiudades));
+				listadProvincias.add(new Provincia(sNombre, listadoCiudades));
 			}
 		}
-		
+
 		return listadProvincias;
 	}
 
 	private ArrayList<Ciudad> getCiudades(String attribute) {
 		ArrayList<Ciudad> listadoCiudades = new ArrayList<Ciudad>();
 		NodeList nodes = docXML.getElementsByTagName("ciudad");
-		
+
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Element nodo = (Element) nodes.item(i);
-			String sIdProvincia = nodo.getAttribute("cod_ine").substring(0, 1);
-			if (sIdProvincia.equals(attribute)) {
+
+			if (nodo.getAttribute("cod_ine").startsWith(attribute) && nodo.getAttribute("capital").equals("1")) {
 				String sNombre;
 				Double dTempMin, dTempMax;
 				try {
@@ -130,10 +125,6 @@ public class GestFch {
 				listadoCiudades.add(new Ciudad(sNombre, dTempMin, dTempMax));
 			}
 		}
-		
 		return listadoCiudades;
 	}
-	
-	
-	
 }
