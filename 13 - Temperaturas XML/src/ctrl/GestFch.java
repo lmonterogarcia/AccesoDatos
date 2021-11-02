@@ -50,7 +50,7 @@ public class GestFch {
 
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				Node nNode = nodeList.item(i);
-
+				
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					String sNombre;
@@ -103,7 +103,8 @@ public class GestFch {
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Element nodo = (Element) nodes.item(i);
 
-			if (nodo.getAttribute("cod_ine").startsWith(attribute) && nodo.getAttribute("capital").equals("1")) {
+			if (nodo.getAttribute("cod_ine").startsWith(attribute.substring(0, 2))
+					&& nodo.getAttribute("capital").equals("1")) { // && nodo.getAttribute("capital").equals("1")
 				String sNombre;
 				Double dTempMin, dTempMax;
 				try {

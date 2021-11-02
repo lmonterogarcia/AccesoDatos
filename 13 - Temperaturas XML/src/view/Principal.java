@@ -13,11 +13,11 @@ public class Principal {
 		GestFch fchXML = new GestFch(FILE_NAME);
 		
 		for (CcAa ca : fchXML.getCcAa()) {
-			System.out.println(ca.getsNombre());
+			System.out.println("Comnidad Autonoma: " + ca.getsNombre());
 			for (Provincia p : ca.getListadoProvincias()) {
-				System.out.println("\t" + p.getsNombre());
+				System.out.println("\tProvincia: " + p.getsNombre());
 				for (Ciudad c : p.getListadoCiudades()) {
-					System.out.println("\t\t" + c.getsNombre() + " [" + c.getdTempMin() + " - " + c.getdTempMax() + "]");
+					System.out.println("\t\tCiudad: " + c.getsNombre() + " [" + c.getdTempMin() + " - " + c.getdTempMax() + "]");
 				}
 			}
 		}
