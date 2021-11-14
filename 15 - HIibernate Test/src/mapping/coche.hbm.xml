@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+>
+
+
+<hibernate-mapping>
+	<class name="model.Coche" table="Coche">
+		<id name="iIdCoche" column="ID_COCHE" type="integer">
+			<generator class="sequence">
+				<param name="sequence_name">SEQ_COCHE</param>
+			</generator>
+		</id>
+		<property name="sMarca" column="MARCA" type="string"/>
+		<property name="sModelo" column="MODELO" type="string"/>
+		<property name="iPotencia" column="POTENCIA" type="integer"/>
+	</class>
+</hibernate-mapping>
