@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -9,6 +11,7 @@ import model.Coche;
 
 public class FrmPrincipal {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		
 		org.jboss.logging.Logger logger = org.jboss.logging.Logger.getLogger("org.hibernate");
@@ -19,15 +22,39 @@ public class FrmPrincipal {
 		
 		Transaction tx = session.beginTransaction();
 		
-		Coche c = new Coche("Tesla","S",0);
-		session.save(c);
 		
-		System.out.println("Añadido el coche: " + c.toString());
+		
+		//INSERTAR
+//		Coche c = new Coche("Mercedes","GLC",2500);
+//		session.save(c);
+//		System.out.println("Añadido el coche: " + c.toString());
+		
+		//BORRAR
+//		Coche c = new Coche(22, "Mercedes","GLC",2500);
+//		session.delete(c);
+//		System.out.println("Borrado el coche: " + c.toString());
+		
+		//ACTUALIZAR
+//		Coche c = new Coche(23, "Mercedes","GLC",3000);
+//		session.update(c);
+//		System.out.println("Actualizado el coche: " + c.toString());
+		
+		//CONSULTA
+//		int iId = 23;
+//		Coche c = session.byId(Coche.class).getReference(iId);
+//		Coche c = session.load(Coche.class, iId);
+//		System.out.println(c);
+		
+		//LISTAR
+		List<Coche> listadoCoches = session.createQuery("from Coche").list();
+		listadoCoches.forEach( c -> System.out.println(c));		
 		
 		tx.commit();
 
 		session.close();
 		conf.close();
+		
+		System.out.println("Fin del programa");
 
 	}
 

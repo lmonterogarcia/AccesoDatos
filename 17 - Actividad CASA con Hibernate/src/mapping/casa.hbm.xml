@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"
+>
+
+<hibernate-mapping>
+	<class name = "model.Casa" table="Casa">
+		<id name="iId" column="ID_CASA" type="integer">
+			<generator class="sequence">
+				<param name="sequence_name">SEQ_CASA</param>
+			</generator>
+		</id>
+		<property name="sCalle" column="CALLE" type="string"/>
+		<property name="iNumero" column="NUMERO" type="integer"/>
+		<property name="dSuperficie" column="SUPERFICIE" type="double"/>
+	</class>
+</hibernate-mapping>

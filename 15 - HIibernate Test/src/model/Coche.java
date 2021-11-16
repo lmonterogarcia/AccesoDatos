@@ -14,6 +14,13 @@ public class Coche {
 		this.iPotencia = null;
 	}
 	
+	public Coche(Integer iIdCoche, String sMarca, String sModelo, Integer iPotencia) {
+		this.iIdCoche = iIdCoche;
+		this.sMarca = sMarca;
+		this.sModelo = sModelo;
+		this.iPotencia = iPotencia;
+	}
+	
 	public Coche(String sMarca, String sModelo, Integer iPotencia) {
 		this.sMarca = sMarca;
 		this.sModelo = sModelo;
