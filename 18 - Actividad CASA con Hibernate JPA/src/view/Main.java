@@ -40,9 +40,9 @@ public class Main {
 		
 		//INSERTAR
 		
-		listadoCasasLeido.forEach(c -> {
-			session.save(c);
-			System.out.println("Añadido la casa: " + c.toString());	
+		listadoCasasLeido.forEach(casa -> {
+			session.save(casa);
+			System.out.println("Añadido la casa: " + casa.toString());	
 		});
 		
 		tx.commit();
