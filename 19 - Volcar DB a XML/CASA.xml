@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CASAS>
+    <CASA>
+        <ID_CASA>27</ID_CASA>
+        <CALLE>Mexico</CALLE>
+        <NUMERO>23</NUMERO>
+        <SUPERFICIE>120.45</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>28</ID_CASA>
+        <CALLE>Panama</CALLE>
+        <NUMERO>1</NUMERO>
+        <SUPERFICIE>300.43</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>29</ID_CASA>
+        <CALLE>Costa Rica</CALLE>
+        <NUMERO>21</NUMERO>
+        <SUPERFICIE>900.8</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>30</ID_CASA>
+        <CALLE>Francia</CALLE>
+        <NUMERO>12</NUMERO>
+        <SUPERFICIE>30</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>31</ID_CASA>
+        <CALLE>Sol</CALLE>
+        <NUMERO>45</NUMERO>
+        <SUPERFICIE>88.67</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>32</ID_CASA>
+        <CALLE>Luna</CALLE>
+        <NUMERO>9</NUMERO>
+        <SUPERFICIE>70.54</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>33</ID_CASA>
+        <CALLE>Colon</CALLE>
+        <NUMERO>26</NUMERO>
+        <SUPERFICIE>564.45</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>34</ID_CASA>
+        <CALLE>Martin Pinto</CALLE>
+        <NUMERO>87</NUMERO>
+        <SUPERFICIE>76.45</SUPERFICIE>
+    </CASA>
+    <CASA>
+        <ID_CASA>35</ID_CASA>
+        <CALLE>Sur</CALLE>
+        <NUMERO>87</NUMERO>
+        <SUPERFICIE>234.45</SUPERFICIE>
+    </CASA>
+</CASAS>

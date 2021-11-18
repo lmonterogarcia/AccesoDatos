@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DEPTS>
+    <DEPT>
+        <DEPTNO>10</DEPTNO>
+        <DNAME>ACCOUNTING</DNAME>
+        <LOC>NEW YORK</LOC>
+    </DEPT>
+    <DEPT>
+        <DEPTNO>20</DEPTNO>
+        <DNAME>RESEARCH</DNAME>
+        <LOC>DALLAS</LOC>
+    </DEPT>
+    <DEPT>
+        <DEPTNO>30</DEPTNO>
+        <DNAME>SALES</DNAME>
+        <LOC>CHICAGO</LOC>
+    </DEPT>
+    <DEPT>
+        <DEPTNO>40</DEPTNO>
+        <DNAME>OPERATIONS</DNAME>
+        <LOC>BOSTON</LOC>
+    </DEPT>
+</DEPTS>

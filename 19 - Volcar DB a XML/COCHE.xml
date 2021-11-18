@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<COCHES>
+    <COCHE>
+        <ID_COCHE>12</ID_COCHE>
+        <MARCA>Renault</MARCA>
+        <MODELO>Kangoo</MODELO>
+        <POTENCIA>1100</POTENCIA>
+    </COCHE>
+</COCHES>
