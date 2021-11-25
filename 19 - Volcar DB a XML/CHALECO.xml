@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CHALECOS>
+    <CHALECO>
+        <ID_CHALECO>7</ID_CHALECO>
+        <MODELO>23RE56</MODELO>
+        <COLOR>0</COLOR>
+        <TALLA>3</TALLA>
+        <PRECIO>999.99</PRECIO>
+        <STOCK>1</STOCK>
+    </CHALECO>
+    <CHALECO>
+        <ID_CHALECO>5</ID_CHALECO>
+        <MODELO>43RD64</MODELO>
+        <COLOR>3</COLOR>
+        <TALLA>0</TALLA>
+        <PRECIO>19.43</PRECIO>
+        <STOCK>23</STOCK>
+    </CHALECO>
+    <CHALECO>
+        <ID_CHALECO>3</ID_CHALECO>
+        <MODELO>23DF45</MODELO>
+        <COLOR>1</COLOR>
+        <TALLA>0</TALLA>
+        <PRECIO>12.99</PRECIO>
+        <STOCK>29</STOCK>
+    </CHALECO>
+</CHALECOS>
