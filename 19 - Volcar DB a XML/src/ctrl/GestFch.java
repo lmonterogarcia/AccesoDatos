@@ -32,71 +32,70 @@ public class GestFch {
 	public static void volcarDB() {
 		ArrayList<String> aTablas;
 
-			try {
-				aTablas = logic.LogTablas.getListadoTablas();
-				for (String tabla : aTablas) {
-					crearXML(tabla);
-					System.out.println("Se ha creado el archivo " + tabla + ".xml");
-				}
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (DOMException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParserConfigurationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			
-
+		try {
+			aTablas = logic.LogTablas.getListadoTablas();
+			for (String tabla : aTablas) {
+				crearXML(tabla);
+				System.out.println("Se ha creado el archivo " + tabla + ".xml");
+			}
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DOMException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
-	private static void crearXML(String sTabla) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, DOMException, ParserConfigurationException  {
+	private static void crearXML(String sTabla) throws InstantiationException, IllegalAccessException,
+			ClassNotFoundException, SQLException, DOMException, ParserConfigurationException {
 
 		int iNumRegistros = 0;
 		ArrayList<String> aNombreColumnas = null;
 
-			iNumRegistros = logic.LogTablas.getNumRegistros(sTabla);
-			aNombreColumnas = logic.LogTablas.getNombreCampos(sTabla);
+		iNumRegistros = logic.LogTablas.getNumRegistros(sTabla);
+		aNombreColumnas = logic.LogTablas.getNombreCampos(sTabla);
 
-			docXML = DocumentBuilderFactory.newInstance().newDocumentBuilder().getDOMImplementation()
-					.createDocument(null, sTabla.toUpperCase() + "S", null);
+		docXML = DocumentBuilderFactory.newInstance().newDocumentBuilder().getDOMImplementation().createDocument(null,
+				sTabla.toUpperCase() + "S", null);
 
-			if (aNombreColumnas != null) {
-				
-				for (int i = 1; i <= iNumRegistros; i++) {
-					Element elemento = docXML.createElement(sTabla);
-					ArrayList<String> aInfoRegistroTablas = logic.LogTablas.getInfoRegistroTabla(sTabla, i);
-					
-					Element tagName;
-					Node tagValue;
-					
-					for (int j = 0; j < aNombreColumnas.size(); j++) {
+		if (aNombreColumnas != null) {
 
-						// Nombre
-						tagName = docXML.createElement(aNombreColumnas.get(j));
-						tagValue = docXML.createTextNode(aInfoRegistroTablas.get(j));
-						tagName.appendChild(tagValue);
-						elemento.appendChild(tagName);
-					}
+			for (int i = 1; i <= iNumRegistros; i++) {
+				Element elemento = docXML.createElement(sTabla);
+				ArrayList<String> aInfoRegistroTablas = logic.LogTablas.getInfoRegistroTabla(sTabla, i);
 
-					Node nRaiz = docXML.getFirstChild();
-					nRaiz.appendChild(elemento);
+				Element tagName;
+				Node tagValue;
 
+				for (int j = 0; j < aNombreColumnas.size(); j++) {
+
+					// Nombre
+					tagName = docXML.createElement(aNombreColumnas.get(j));
+					tagValue = docXML.createTextNode(aInfoRegistroTablas.get(j));
+					tagName.appendChild(tagValue);
+					elemento.appendChild(tagName);
 				}
-				saveData(sTabla);
+
+				Node nRaiz = docXML.getFirstChild();
+				nRaiz.appendChild(elemento);
+
 			}
+			saveData(sTabla);
+		}
 	}
 
 	public static void saveData(String sTabla) {

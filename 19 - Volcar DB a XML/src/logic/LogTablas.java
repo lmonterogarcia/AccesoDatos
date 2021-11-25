@@ -57,7 +57,7 @@ public class LogTablas {
 		dbms.DBoracle.openConn();
 
 		Statement miOrden = dbms.DBoracle.getConn().createStatement();
-		miOrden.execute("SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = '" + sTabla + "'");
+		miOrden.execute("SELECT COLUMN_NAME FROM USER_TAB_COLUMNS WHERE TABLE_NAME = '" + sTabla + "'");
 
 		ResultSet resultado = miOrden.getResultSet();
 

@@ -2,7 +2,13 @@ package dbms;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,19 +19,22 @@ import model.ConectionInfo;
 public class DBoracle {
 
 	private static Connection conn;
+	private static ConectionInfo connInfo;
 
 	public static Connection getConn() {
 		return conn;
 	}
 
 	public static void closeConn() throws SQLException {
+		saveConnectionObject();
 		conn.close();
 	}
 
 	public static void openConn()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
-		ConectionInfo connInfo = leerConectionInfo();
+//		connInfo = leerConectionInfo();
+		readConnectionObject();
 
 		String dbHOST = connInfo.getDbHOST();
 		String dbPORT = connInfo.getDbPORT();
@@ -70,6 +79,38 @@ public class DBoracle {
 		return oConection;
 	}
 
+	public static void saveConnectionObject() {
+		String fch = "oracleconnection.dat";
+		try {
+
+			ObjectOutputStream buff = new ObjectOutputStream(new FileOutputStream(fch));
+			buff.writeObject(connInfo);
+			buff.close();
+
+		} catch (FileNotFoundException e) {
+			System.err.println("ERROR: " + fch + " no existe.");
+		} catch (IOException e) {
+			System.err.println("ERROR: No se puede escribir en el fichero.");
+		}
+	}
+
+	public static void readConnectionObject() {
+		String fch = "oracleconnection.dat";
+		try {
+
+			ObjectInputStream buff = new ObjectInputStream(new FileInputStream(fch));
+			connInfo = (ConectionInfo) buff.readObject();
+			buff.close();
+
+		} catch (FileNotFoundException e) {
+			System.err.println("ERROR: " + fch + " no existe.");
+		} catch (IOException e) {
+			System.err.println("ERROR: No se puede leer del fichero.");
+		} catch (ClassNotFoundException e) {
+			System.err.println("ERROR: El fichero no contiene un coche");
+		}
+	}
+	
 	public static boolean testDbOracle() {
 		boolean booExito;
 

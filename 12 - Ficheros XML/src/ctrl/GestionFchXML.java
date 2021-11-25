@@ -235,7 +235,7 @@ public class GestionFchXML {
 						, new StreamResult(new FileOutputStream("nuevosdato.xml")));
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.err.println("Error al guardar el archivo.");
 		}
 
 	}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"
+>
+
+<hibernate-configuration>
+	<session-factory>
+	
+		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+		
+		<!-- Parametros de conexión con la BD -->
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@luismontero.ddns.net:1521:ORCL</property>
+		<property name="hibernate.connection.username">LUIS</property>
+    	<property name="hibernate.connection.password">informedac</property>
+		<property name="hibernate.connection.pool_size">10</property>
+		<property name="hibernate.connection.dialect">org.hibernate.dialect.Oracle10Dialect</property>
+		
+		<!-- Mostrar el SQL general por la consola para debugging -->
+		<property name="show_sql">false</property>
+		<property name="format_sql">true</property>
+		
+		<!-- Ficheros de mappeo -->
+		<mapping class="model.Casa"/>
+		<!-- <mapping resource="mapping/coche.hbm.xml" class="view.Coche" /> -->
+		
+	</session-factory>
+</hibernate-configuration>

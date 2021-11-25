@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ConectionInfo {
+public class ConectionInfo implements Serializable{
 
 	private String dbHOST;
 	private String dbPORT;

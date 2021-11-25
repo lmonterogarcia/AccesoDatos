@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CASAS>
+    <Casa>
+        <Poblacion>Sevilla</Poblacion>
+        <Superficie>234.87</Superficie>
+        <Aseos>2</Aseos>
+    </Casa>
+    <Casa>
+        <Poblacion>Huelva</Poblacion>
+        <Superficie>124.6</Superficie>
+        <Aseos>3</Aseos>
+    </Casa>
+    <Casa>
+        <Poblacion>Cadiz</Poblacion>
+        <Superficie>985.8</Superficie>
+        <Aseos>1</Aseos>
+    </Casa>
+    <Casa>
+        <Poblacion>Cordoba</Poblacion>
+        <Superficie>2456.9</Superficie>
+        <Aseos>0</Aseos>
+    </Casa>
+    <Casa>
+        <Poblacion>Malaga</Poblacion>
+        <Superficie>30.5</Superficie>
+        <Aseos>1</Aseos>
+    </Casa>
+</CASAS>
