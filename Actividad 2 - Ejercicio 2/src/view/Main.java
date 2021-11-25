@@ -35,18 +35,17 @@ public class Main {
 		} catch (IOException e) {
 			System.err.println("ERROR: No se puede leer del fichero.");
 		} catch (ClassNotFoundException e) {
-			System.err.println("ERROR: El fichero no contiene un coche");
+			System.err.println("ERROR: El fichero no contiene una casa");
 		}
 
 		return listadoCasas;
 	}
 	
 	private static void guardarBD(ArrayList<Casa> listado) {
-		
-		listado.forEach(casa -> {
+
 			try {
 				
-				logic.LogCasa.insertar(casa);
+				logic.LogCasa.insertarListado(listado);
 				
 			} catch (InstantiationException e) {
 				System.err.println("Error de Instantation DB: " + e.getMessage());
@@ -55,14 +54,12 @@ public class Main {
 				System.err.println("Error de Acceso Ilegal DB: " + e.getMessage());
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				System.err.println("Error de Clases no Encontrada DB: " + e.getMessage());
+				System.err.println("Error de Clase no Encontrada DB: " + e.getMessage());
 				e.printStackTrace();
 			} catch (SQLException e) {
 				System.err.println("Error de SQL DB: " + e.getMessage());
 				e.printStackTrace();
 			}
-		});
-		
 	}
 
 }
